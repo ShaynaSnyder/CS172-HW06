@@ -7,6 +7,9 @@
 #include <cstdlib>
 #include <iomanip>
 #include <fstream>
+#include <algorithm>
+#include "Circle.hpp"
+#include "Complex.hpp"
 
 using namespace std;
 
@@ -38,10 +41,9 @@ int main()
     
     
     //13.2 Count Characters
-    //Write a program that prompts the user to enter a file name and displays the number of characters in the file.
-    //declaring string variable for the file name
+    //declares string variable for file name
     string filename;
-    //entering user input into file name
+    //enters user input into file name
     cout << "Enter a file name: ";
     cin >> filename;
     //if statements determine if the file exists
@@ -62,15 +64,59 @@ int main()
     
     
     //13.5 Baby name popularity ranking
-    //pg. 519
-    
+    ifstream input;
+    //prompts user to input values for strings year, gender, and name
+    string year, gender, name;
+    cout << "Enter the year (2010-2014): ";
+    cin >> year;
+    cout << "Enter the gender (m or f): ";
+    cin >> gender;
+    cout << "Enter the name: ";
+    cin >> name;
+    //declares string filename equal to the name of the baby name file
+    string namesfile = "Babynameranking" + year + ".txt";
+    ifstream infile(namesfile.c_str());
+    string bname, gname, rank;
+    //uses if statements to determine if name is boy or girl name
+    if(gender=="m")
+        bname = name;
+    else if(gender=="f")
+        gname = name;
     
     //14.3 The Circle class
     //Implement the relational operators (<, <=, ==, !=, >, >=) in the Circle class in Listing 10.9, CircleWithConstantMemberFunctions.h, to order the Circle objects according to their radii.
-    
+    Circle c1(3.7);
+    Circle c2(0.6);
+    Circle c3(1.2);
+    cout << "\nOrder of Circle objects: ";
+    //uses if statements and bool operators to order the circles by radii
+    if(c1<=c2 && c1<=c3)
+    {
+        cout << c1.getRadius() << ", ";
+        if(c2<=c3)
+            cout << c2.getRadius() << ", " << c3.getRadius() << endl;
+        else
+            cout << c3.getRadius() << ", " << c2.getRadius() << endl;
+    }
+    else if(c2<=c3)
+    {
+        cout << c2.getRadius() << ", ";
+        if(c1<=c3)
+            cout << c1.getRadius() << ", " << c3.getRadius() << endl;
+        else
+            cout << c3.getRadius() << ", " << c1.getRadius() << endl;
+    }
+    else
+    {
+        cout << c3.getRadius() << ", ";
+        if(c1<=c2)
+            cout << c1.getRadius() << ", " << c2.getRadius() << endl;
+        else
+            cout << c2.getRadius() << ", " << c1.getRadius() << endl;
+    }
     
     //14.7 Math: The Complex class
-    //pg. 556
+    
     
     
     return 0;
